@@ -4,7 +4,7 @@ A simple Bash-based text extractor for Kali Linux GNOME (Debian-based). Captures
 
 ## Installation
 
-1. **Download the `.deb` file** from the [Releases](../../releases) page (or from the repository directly).
+1. **Download the `.deb` file**
 
 2. **Install** using `dpkg`:
 
@@ -12,11 +12,7 @@ A simple Bash-based text extractor for Kali Linux GNOME (Debian-based). Captures
    sudo dpkg -i text-extractor.deb
    sudo apt-get install -f
    ```
-
-3. **Verify** the script is placed in `/opt/text-extractor/text_extractor.sh`.
-
-## Optional – Assign a Keyboard Shortcut (windows+T)
-
+   
 To launch the text extractor with **Win+T (windows+T)**, run:
 
 ```bash
@@ -41,8 +37,13 @@ After this, press **Win+T** to run the text extractor.
 
 ## Troubleshooting
 
-- **Missing Dependencies**:  
-  Make sure to install `maim`, `tesseract-ocr`, `xclip`, and `libnotify-bin`.
+- **Missing Dependencies**: run this,
+
+```bash
+sudo apt update                                        
+sudo apt install maim tesseract-ocr xclip libnotify-bin
+```
+  
 - **No GUI Session**:  
   If the keyboard shortcut doesn’t work, ensure you’re running GNOME and that no other shortcuts conflict with `<Super>t`.
 
