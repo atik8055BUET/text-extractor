@@ -1,30 +1,60 @@
-# Text Extractor for Kali Linux GNOME
+# Text Extractor – Debian Package
 
-A lightweight utility that lets you select a screen area, perform OCR using **Tesseract**, and automatically copy the extracted text to your clipboard. This repository also demonstrates how to package the script as a `.deb` for easy distribution, add a desktop icon/launcher, and set a GNOME keyboard shortcut (e.g., **Super+T**).
+A simple Bash-based text extractor for Kali Linux GNOME (Debian-based). Captures a user-selected area of the screen, runs OCR via Tesseract, and copies the extracted text to the clipboard.
 
----
+## Installation
 
-## Features
+1. **Download the `.deb` file** from the [Releases](../../releases) page (or from the repository directly).
 
-- **Area Selection**: Select any portion of the screen to capture.
-- **OCR Extraction**: Automatically runs [Tesseract OCR](https://github.com/tesseract-ocr/tesseract).
-- **Clipboard Copy**: Places the recognized text into your clipboard for easy pasting.
-- **Desktop Notification**: Informs you once extraction is complete.
-- **Installable**: Provides a guide to package as a `.deb` and integrate into your system menu with an icon.
-- **Optional Keyboard Shortcut**: Can be configured (via GNOME’s keyboard settings or a dconf override) to launch with **Win+T** or any other key combo.
+2. **Install** using `dpkg`:
 
----
+   ```bash
+   sudo dpkg -i text-extractor.deb
+   ```
 
-## Requirements
+   If you see any missing dependencies, run:
+   ```bash
+   sudo apt-get install -f
+   ```
 
-- **Kali Linux GNOME** (or any Debian-based GNOME environment)
-- `maim` (screenshot tool)
-- `tesseract-ocr` (OCR engine)
-- `xclip` (clipboard utility)
-- `libnotify-bin` (desktop notifications)
+3. **Verify** the script is placed in `/opt/text-extractor/text_extractor.sh`.
 
-Install them with:
+## Optional – Assign a Keyboard Shortcut (windows+T)
+
+To launch the text extractor with **Win+T (windows+T)**, run:
 
 ```bash
-sudo apt update
-sudo apt install maim tesseract-ocr xclip libnotify-bin
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
+"['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" name "Text Extractor"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" command "/opt/text-extractor/text_extractor.sh"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" binding "<Super>t"
+```
+
+After this, press **Win+T** to run the text extractor. 
+
+> **Note**: If you already have a shortcut bound to `<Super>t` or `windows+t`, remove or change it before running these commands.
+
+## Usage
+
+1. **Select an area**: The screen selection tool appears.
+2. Once selected, **OCR** processes the screenshot.
+3. The **extracted text** goes directly to your clipboard.
+4. A **notification** confirms success.
+
+## Troubleshooting
+
+- **Missing Dependencies**:  
+  Make sure to install `maim`, `tesseract-ocr`, `xclip`, and `libnotify-bin`.
+- **No GUI Session**:  
+  If the keyboard shortcut doesn’t work, ensure you’re running GNOME and that no other shortcuts conflict with `<Super>t`.
+
+---
+
+**Enjoy quick OCR from your screen!**
+
+## Author
+MD Atikul Islam
+CSE,BUET
+atikul.bn@gmail.com
