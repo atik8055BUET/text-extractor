@@ -10,10 +10,6 @@ A simple Bash-based text extractor for Kali Linux GNOME (Debian-based). Captures
 
    ```bash
    sudo dpkg -i text-extractor.deb
-   ```
-
-   If you see any missing dependencies, run:
-   ```bash
    sudo apt-get install -f
    ```
 
